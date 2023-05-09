@@ -1,5 +1,9 @@
+<input #inputName type="text" name="name" id="name" placeholder="Nome">
+<input #inputPhoto type="text" name="name" id="name" placeholder="photo">
+<button (click)="createUser()">Criar Usuario</button>
+
+
 <div *ngFor="let user of users">
-  <img [src]="user.photo" alt="" />
+  <img [src]="user.photo" alt="" width="80px" />
   <p>{{ timeMessage }}, {{ user.name }}!</p>
-  <button (click)="createUser()">Criar Usuario</button>
 </div>

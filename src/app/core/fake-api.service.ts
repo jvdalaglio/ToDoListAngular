@@ -23,7 +23,6 @@ export class FakeApiService {
   createUser(user: User): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body = JSON.stringify(user);
-    console.log(body);
     return this.http.post(`${this.url}/users`, body,{'headers':headers})
   }
 }

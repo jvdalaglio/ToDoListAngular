@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FakeApiService } from 'src/app/core/fake-api.service';
 import { User } from 'src/app/models/users.model';
 
@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
   public users: any;
   public hours: number = new Date().getHours();
   public timeMessage: any;
-  public data? : User;
+  @ViewChild('inputName') inputName!: ElementRef<any>;
+  @ViewChild('inputPhoto') inputPhoto!: ElementRef<any>;
+
 
 
   ngOnInit(): void {
@@ -26,7 +28,9 @@ export class HomeComponent implements OnInit {
   }
 
   getUsers() {
-    this.fakeApiService.getUsers().subscribe(res => this.users = res)
+    this.fakeApiService.getUsers().subscribe(
+      res => this.users = res
+    )
   }
 
   getTimeMessage() {
@@ -40,7 +44,14 @@ export class HomeComponent implements OnInit {
   }
 
   createUser() {
-    this.fakeApiService.createUser(this.user).subscribe(data => console.log(data))
+    this.user = {
+      id: 0,
+      name: this.inputName?.nativeElement.value,
+      photo: this.inputPhoto?.nativeElement.value,
+    }
+    this.fakeApiService.createUser(this.user).subscribe(
+      data => data = this.user
+    )
   }
 
 }
