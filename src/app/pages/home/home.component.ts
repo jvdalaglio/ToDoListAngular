@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FakeApiService } from 'src/app/core/fake-api.service';
+import { User } from 'src/app/models/users.model';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,15 @@ import { FakeApiService } from 'src/app/core/fake-api.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private fakeApiService: FakeApiService
+    private fakeApiService: FakeApiService,
+    public user: User
   ) {}
 
   public users: any;
   public hours: number = new Date().getHours();
   public timeMessage: any;
+  public data? : User;
+
 
   ngOnInit(): void {
     this.getUsers()
@@ -33,6 +37,10 @@ export class HomeComponent implements OnInit {
     } else {
       this.timeMessage = "Boa tarde"
     }
+  }
+
+  createUser() {
+    this.fakeApiService.createUser(this.user).subscribe(data => console.log(data))
   }
 
 }

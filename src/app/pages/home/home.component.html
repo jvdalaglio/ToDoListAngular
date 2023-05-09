@@ -1,4 +1,5 @@
 <div *ngFor="let user of users">
   <img [src]="user.photo" alt="" />
   <p>{{ timeMessage }}, {{ user.name }}!</p>
+  <button (click)="createUser()">Criar Usuario</button>
 </div>
